@@ -14,12 +14,15 @@ The application uses a custom database access Python class to instantiate and qu
 
 # Usage
 The application initially displays a table, with unfiltered data from the database.  Below the table is a pie chart showing breed, by percentage, of all animals within the selected filter.
+
 ![](images/usage_1.png)
 
 Selecting one of the radio buttons along the top will filter the table to animals ideally suited to each purpose, as provided for in the specification.  The pie chart is updated to reflect the breakdown of breeds in this selection.
+
 ![](images/usage_2.png)
 
 Each row in the table represents an animal in the database.  Selecting a row will show the animal’s location on the interactive map.  Clicking the marker on the map will display the animals name and breed.
+
 ![](images/usage_3.png)
 
 # Contact
