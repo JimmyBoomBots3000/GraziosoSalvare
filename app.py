@@ -14,10 +14,9 @@ from MongoCrud import AnimalShelter
 # Data Manipulation / Model
 ###########################
 
-username = "aacuser"
-password = "password"
-port = 33353
-shelter = AnimalShelter(username, password, port)
+username = "dbuser"
+password = "passwd987"
+shelter = AnimalShelter(username, password)
 
 # class read method must support return of cursor object and accept projection json input
 df = pd.DataFrame.from_records(shelter.read({}))
