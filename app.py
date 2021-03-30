@@ -5,6 +5,7 @@ import dash_leaflet as dl
 import dash_table
 import pandas as pd
 import plotly.express as px
+
 from dash.dependencies import Input, Output
 
 # change animal_shelter and AnimalShelter to match your CRUD Python module file name and class name
@@ -14,8 +15,8 @@ from MongoCrud import AnimalShelter
 # Data Manipulation / Model
 ###########################
 
-username = "dbuser"
-password = "passwd987"
+username = 'testuser'
+password = 'testpassword'
 shelter = AnimalShelter(username, password)
 
 # class read method must support return of cursor object and accept projection json input
