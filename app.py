@@ -25,7 +25,7 @@ df = pd.DataFrame.from_records(shelter.read({}))
 #########################
 # Dashboard Layout / View
 #########################
-# app = JupyterDash('Mod7')
+# app = Dash app
 app = dash.Dash()
 
 app.layout = html.Div([
