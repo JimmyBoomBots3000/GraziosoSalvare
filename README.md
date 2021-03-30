@@ -14,33 +14,16 @@ The application uses a custom database access Python class to instantiate and qu
 
 # Usage
 The application initially displays a table, with unfiltered data from the database.  Below the table is a pie chart showing breed, by percentage, of all animals within the selected filter.
+
 ![](images/usage_1.png)
 
 Selecting one of the radio buttons along the top will filter the table to animals ideally suited to each purpose, as provided for in the specification.  The pie chart is updated to reflect the breakdown of breeds in this selection.
+
 ![](images/usage_2.png)
 
 Each row in the table represents an animal in the database.  Selecting a row will show the animal’s location on the interactive map.  Clicking the marker on the map will display the animals name and breed.
+
 ![](images/usage_3.png)
-
-# Challenges
-One challenge area of development was developing the pie chart to display drill-down information on animal breed for selected.  Developing this function ended up much simpler than I originally thought, and extraneous code was breaking this feature for most of development.
-
-# Questions
-**Q**: *How do you write programs that are maintainable, readable, and adaptable? Especially consider your work on the CRUD Python module from Project One, which you used to connect the dashboard widgets to the database in Project Two. What were the advantages of working in this way? How else could you use this CRUD Python module in the future?*
-
-**A**: Modularity goes a long way toward writing maintainable, readable, and adaptable programs.  This is why we developed a Python class to query the database.  This class provides access to the database given in this project, but could be easily adapted to suit any database
-
-
-**Q**: *How do you approach a problem as a computer scientist? Consider how you approached the database or dashboard requirements that Grazioso Salvare requested. How did your approach to this project differ from previous assignments in other courses? What techniques or strategies would you use in the future to create databases to meet other client requests?*
-
-**A**: I approach a problem as a Computer Scientist much the same way I approach any problem; what’s my desired outcome? What’s the purpose of what I’m doing? This is the top-level goal that broken down into smaller sub-problems.  For example, part of the assignment was to produce widgets that responded to queried data.  Before designing these widgets, it was important to know that we were getting the correct data in our queries.
-
-
-**Q**: *What do computer scientists do, and why does it matter? How would your work on this type of project help a company, like Grazioso Salvare, to do their work better?*
-
-**A**: At the most basic level, computer scientists use technology to solve problems, and why this matters really depends on whose problem you’re solving.  In the case of Grazioso Salvare, they needed an efficient way of finding the animals they were looking for with an application that was intuitive and didn’t require any user training.  There might have been other ways to achieve similar results, but those may have required users to have certain skills or be trained on those skills.
-
 
 # Contact
 James Richmond
-james.richmond@snhu.edu
