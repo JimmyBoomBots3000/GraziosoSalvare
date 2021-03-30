@@ -26,7 +26,8 @@ df = pd.DataFrame.from_records(shelter.read({}))
 # Dashboard Layout / View
 #########################
 # app = Dash app
-app = dash.Dash()
+app = dash.Dash(__name__)
+server = app.server
 
 app.layout = html.Div([
     # Top section of interface
