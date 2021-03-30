@@ -12,7 +12,7 @@ from dash.dependencies import Input, Output
 from MongoCrud import AnimalShelter
 
 ###########################
-# Data Manipulation / Model
+# Data Model
 ###########################
 
 username = 'testuser'
@@ -89,13 +89,14 @@ app.layout = html.Div([
     html.Hr(),
     html.Div(
         html.Tr([
+            # Pie chart
             html.Td(
                 dcc.Graph(
                     id='pie'
                 )
             ),
+            # Map
             html.Td(
-                # Map
                 id='map-id',
                 className='col s12 m6'
             )
