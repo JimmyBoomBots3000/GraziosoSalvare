@@ -35,29 +35,22 @@ app.layout = html.Div([
     dbc.Row([
         dbc.Col(
             html.A(html.Img(src="https://i.ibb.co/n1X1XgS/img.png", style={'height': '150px'}),
-                   href="https://www.snhu.edu/"
-                   ),
-            width=2,
-            align='center'
-        ),
+                   href="https://www.snhu.edu/"),
+            width='auto',
+            align='center'),
         dbc.Col([
             dbc.Row([
-                dbc.Col(html.H3("Animal Finder Dashboard"),
-                        width={'size': True},
-                        align='center'
-
-                        ),
+                dbc.Col(
+                    html.H3("Animal Finder Dashboard"), width={'size': True}, align='center'),
                 dbc.Col(
                     html.A(html.Img(src="https://www.python.org/static/community_logos/python-powered-w-70x28.png"),
                            href="https://www.python.org/about/"
                            ),
                     width=1)
-            ]
-
-            ),
+            ]),
             dbc.Row([
                 dbc.Col([
-                    html.Hr(),
+                    # html.Hr(),
                     # Row containing radio buttons
                     html.Div(
                         className="row",
@@ -75,15 +68,14 @@ app.layout = html.Div([
                             )
                         ]
                     ),
-                    html.Hr()
+                    # html.Hr()
                 ],
                     width=True),
             ],
-                justify='left'
-
-            )
+                justify='left')
         ])
-    ]),
+    ],
+        style={'backgroundColor': 'rgb(255,230,230)'}),
 
     dbc.Row([
         dbc.Col(
@@ -112,15 +104,14 @@ app.layout = html.Div([
                     'maxWidth': 0
                 }
             ),
-            width=12
-        )
+            width=12)
     ]),
+
     dbc.Row([
         dbc.Col(
             # Pie Chart
             dcc.Graph(id='pie'),
-            width=6
-        ),
+            width=6),
         dbc.Col(
             # Map
             dl.Map([dl.TileLayer(), dl.LayerGroup(id="layer")],
@@ -129,11 +120,11 @@ app.layout = html.Div([
                    center=[30.31880634, -97.72403767],
                    zoom=5
                    ),
-            width=6
-        ),
+            width=6),
     ]),
 ],
-    style={'width': '98%'}
+    style={'width': '98%',
+           'padding-left': '10px'}
 
 )
 
@@ -154,11 +145,19 @@ app.layout = html.Div([
         Input('datatable-id', "selected_rows")
     ]
 )
-# Calback inputs are passed as arguments
-def update_map(viewData, row):
-    dff = pd.DataFrame.from_dict(viewData)
+# Callback inputs are passed as arguments
+def update_map(viewdata, row):
+    dff = pd.DataFrame.from_dict(viewdata)
+
     lat = float(dff.iloc[row, 14])
     long = float(dff.iloc[row, 15])
+
+    animal_type = str(dff.iloc[row, 4].item())
+    breed = str(dff.iloc[row, 5].item())
+
+    animal_name = str(dff.iloc[row, 10].item())
+    if animal_name == '':
+        animal_name = '[No name]'
 
     children = [
         # Marker with tool tip and popup
@@ -170,10 +169,10 @@ def update_map(viewData, row):
             ],
             children=[
                 dl.Tooltip(
-                    dff.iloc[row, 4]),  # animal type
+                    animal_type),
                 dl.Popup([
-                    html.H3(dff.iloc[row, 10]),  # animal name
-                    html.H4(dff.iloc[row, 5])  # animal breed
+                    html.H3(animal_name),
+                    html.H4(breed)
                 ])
             ]
         )
@@ -265,9 +264,11 @@ def generate_chart(data):
     dff = pd.DataFrame.from_dict(data)
 
     fig = px.pie(
-        dff,
+        data_frame=dff,
         names='breed',
     )
+
+    fig.update_traces(textposition='inside')
 
     return fig
 
