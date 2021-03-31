@@ -110,15 +110,16 @@ app.layout = html.Div([
     dbc.Row([
         dbc.Col(
             # Pie Chart
-            dcc.Graph(id='pie'),
+            dcc.Graph(
+                id='pie'),
             width=6),
         dbc.Col(
             # Map
             dl.Map([dl.TileLayer(), dl.LayerGroup(id="layer")],
                    id="map-id",
-                   style={'width': '100%', 'height': '50vh', 'margin': "auto", "display": "block"},
+                   style={'width': '100%', 'height': '45vh', 'margin': "auto", "display": "block"},
                    center=[30.31880634, -97.72403767],
-                   zoom=5
+                   zoom=6,
                    ),
             width=6),
     ]),
