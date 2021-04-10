@@ -8,8 +8,6 @@ import pandas as pd
 import plotly.express as px
 
 from dash.dependencies import Input, Output
-
-# change animal_shelter and AnimalShelter to match your CRUD Python module file name and class name
 from MongoCrud import AnimalShelter
 
 ###########################
