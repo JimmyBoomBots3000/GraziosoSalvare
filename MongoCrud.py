@@ -12,7 +12,6 @@ class AnimalShelter(object):
         uri = 'mongodb+srv://%s:%s@cluster0.fmsl9.mongodb.net/AAC?authSource=admin' % (username, password)
         self.client = MongoClient(uri)
 
-        # self.database = self.client['AAC']
         self.database = self.client.AAC
 
     # CREATE method: add a document to the database collection
