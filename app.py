@@ -84,23 +84,23 @@ app.layout = html.Div([
                     {"name": i, "id": i, "deletable": False, "selectable": True} for i in df.columns
                 ],
                 data=df.to_dict('records'),
-                editable=False,
-                filter_action="native",
-                sort_action="native",
-                sort_mode="multi",
-                column_selectable=False,
-                row_selectable="single",
-                row_deletable=False,
-                page_action="native",
-                selected_rows=[],
-                selected_columns=[],
-                page_current=0,
-                page_size=10,
-                style_cell={
-                    'overflow': 'hidden',
-                    'textOverflow': 'ellipsis',
-                    'maxWidth': 0
-                }
+                # editable=False,
+                # filter_action="native",
+                # sort_action="native",
+                # sort_mode="multi",
+                # column_selectable=False,
+                # row_selectable="single",
+                # row_deletable=False,
+                # page_action="native",
+                # selected_rows=[],
+                # selected_columns=[],
+                # page_current=0,
+                # page_size=10,
+                # style_cell={
+                #     'overflow': 'hidden',
+                #     'textOverflow': 'ellipsis',
+                #     'maxWidth': 0
+                # }
             ),
             width=12)
     ]),
