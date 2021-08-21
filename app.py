@@ -81,27 +81,27 @@ app.layout = html.Div([
             dash_table.DataTable(
                 id='datatable-id',
                 columns=[
-                    # {"name": i, "id": i, "deletable": False, "selectable": True} for i in df.columns
-                    {"name": i, "id": i} for i in df.columns
+                    {"name": i, "id": i, "deletable": False, "selectable": True} for i in df.columns
+                    # {"name": i, "id": i} for i in df.columns
                 ],
                 data=df.to_dict('records'),
-                # editable=False,
-                # filter_action="native",
-                # sort_action="native",
-                # sort_mode="multi",
-                # column_selectable=False,
-                # row_selectable="single",
-                # row_deletable=False,
-                # page_action="native",
-                # selected_rows=[],
-                # selected_columns=[],
-                # page_current=0,
-                # page_size=10,
-                # style_cell={
-                #     'overflow': 'hidden',
-                #     'textOverflow': 'ellipsis',
-                #     'maxWidth': 0
-                # }
+                editable=False,
+                filter_action="native",
+                sort_action="native",
+                sort_mode="multi",
+                column_selectable=False,
+                row_selectable="single",
+                row_deletable=False,
+                page_action="native",
+                selected_rows=[],
+                selected_columns=[],
+                page_current=0,
+                page_size=10,
+                style_cell={
+                    'overflow': 'hidden',
+                    'textOverflow': 'ellipsis',
+                    'maxWidth': 0
+                }
             ),
             width=12)
     ]),
@@ -148,43 +148,41 @@ app.layout = html.Div([
 def update_map(viewdata, row):
     dff = pd.DataFrame.from_dict(viewdata)
 
-    if row is None:
-        lat = 30.31880634
-        long = -97.72403767
-    else:
+    if row is not None:
         lat = float(dff.iloc[row, 14])
         long = float(dff.iloc[row, 15])
 
-    animal_type = str(dff.iloc[row, 4].item())
-    breed = str(dff.iloc[row, 5].item())
+        animal_type = str(dff.iloc[row, 4].item())
+        breed = str(dff.iloc[row, 5].item())
 
-    animal_name = str(dff.iloc[row, 10].item())
-    if animal_name == '':
-        animal_name = '[No name]'
+        animal_name = str(dff.iloc[row, 10].item())
+        if animal_name == '':
+            animal_name = '[No name]'
 
-    children = [
-        # Marker with tool tip and popup
-        dl.TileLayer(id="base-layer-id"),
-        dl.Marker(
-            position=[
-                lat,
-                long
-            ],
-            children=[
-                dl.Tooltip(
-                    animal_type),
-                dl.Popup([
-                    html.H3(animal_name),
-                    html.H4(breed)
-                ])
-            ]
-        )
-    ]
+        children = [
+            # Marker with tool tip and popup
+            dl.TileLayer(id="base-layer-id"),
+            dl.Marker(
+                position=[
+                    lat,
+                    long
+                ],
+                children=[
+                    dl.Tooltip(
+                        animal_type),
+                    dl.Popup([
+                        html.H3(animal_name),
+                        html.H4(breed)
+                    ])
+                ]
+            )
+        ]
 
-    # Center map on selection
-    center = [lat, long]
-
-    return children, center, 10
+        # Center map on selection
+        center = [lat, long]
+        return children, center, 10
+    else:
+        return None, None, 10
 
 
 # Callback for radio buttons
