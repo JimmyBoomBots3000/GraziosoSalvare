@@ -148,8 +148,12 @@ app.layout = html.Div([
 def update_map(viewdata, row):
     dff = pd.DataFrame.from_dict(viewdata)
 
-    lat = float(dff.iloc[row, 14])
-    long = float(dff.iloc[row, 15])
+    if row == null:
+        lat = 30.31880634
+        long = -97.72403767
+    else:
+        lat = float(dff.iloc[row, 14])
+        long = float(dff.iloc[row, 15])
 
     animal_type = str(dff.iloc[row, 4].item())
     breed = str(dff.iloc[row, 5].item())
