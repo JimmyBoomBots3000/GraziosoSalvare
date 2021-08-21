@@ -148,7 +148,7 @@ app.layout = html.Div([
 def update_map(viewdata, row):
     dff = pd.DataFrame.from_dict(viewdata)
 
-    if row == null:
+    if row is None:
         lat = 30.31880634
         long = -97.72403767
     else:
