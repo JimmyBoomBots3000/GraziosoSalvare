@@ -27,53 +27,58 @@ df = pd.DataFrame.from_records(shelter.read({}))
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 app.title = 'Grazioso Salvare'
+NAVHEIGHT=100
 
 app.layout = html.Div([
 
-    dbc.Row([
-        dbc.Col(
-            html.A(html.Img(src="https://i.ibb.co/n1X1XgS/img.png", style={'height': '150px'}),
-                   href="https://www.snhu.edu/"),
-            width='auto',
-            align='center'),
-        dbc.Col([
-            dbc.Row([
-                dbc.Col(
-                    html.H3("Animal Finder Dashboard"), width={'size': True}, align='center'),
-                dbc.Col(
-                    html.A(html.Img(src="https://www.python.org/static/community_logos/python-powered-w-70x28.png"),
-                           href="https://www.python.org/about/"
-                           ),
-                    width=1)
-            ]),
-            dbc.Row([
-                dbc.Col([
-                    # html.Hr(),
-                    # Row containing radio buttons
-                    html.Div(
-                        className="row",
-                        style={'display': 'flex'},
-                        children=[
-                            dbc.RadioItems(
-                                id='rescue_types',
-                                options=[
-                                    {'label': 'Water Rescue', 'value': 'water'},
-                                    {'label': 'Mountain/ Wilderness Rescue', 'value': 'mountain'},
-                                    {'label': 'Disaster/ Individual Tracking', 'value': 'tracking'},
-                                    {'label': 'Reset', 'value': 'reset'}
-                                ],
-                                value='reset',
-                            )
-                        ]
-                    ),
-                    # html.Hr()
+    dbc.Navbar(
+        [
+            dbc.Col(
+                html.A(html.Img(src="https://i.ibb.co/n1X1XgS/img.png", style={'height': str(NAVHEIGHT)+'px'}),
+                       href="https://www.snhu.edu/"),
+                width='auto',
+                align='center'),
+            dbc.Col([
+                dbc.Row([
+                    dbc.Col(
+                        html.H3("Animal Finder Dashboard"), width={'size': True}, align='center'),
+                    dbc.Col(
+                        html.A(html.Img(src="https://www.python.org/static/community_logos/python-powered-w-70x28.png"),
+                               href="https://www.python.org/about/"
+                               ),
+                        width=1)
+                ]),
+                dbc.Row([
+                    dbc.Col([
+                        # html.Hr(),
+                        # Row containing radio buttons
+                        html.Div(
+                            className="row",
+                            style={'display': 'flex'},
+                            children=[
+                                dbc.RadioItems(
+                                    id='rescue_types',
+                                    options=[
+                                        {'label': 'Water Rescue', 'value': 'water'},
+                                        {'label': 'Mountain/ Wilderness Rescue', 'value': 'mountain'},
+                                        {'label': 'Disaster/ Individual Tracking', 'value': 'tracking'},
+                                        {'label': 'Reset', 'value': 'reset'}
+                                    ],
+                                    value='reset',
+                                    inline=True
+                                )
+                            ]
+                        ),
+                        # html.Hr()
+                    ],
+                        width=True),
                 ],
-                    width=True),
-            ],
-                justify='left')
-        ])
-    ],
-        style={'backgroundColor': 'rgb(255,230,230)'}),
+                    justify='left')
+            ])
+        ],
+        color='rgb(255,230,230)',
+        fixed='top'
+    ),
 
     dbc.Row([
         dbc.Col(
@@ -82,7 +87,6 @@ app.layout = html.Div([
                 id='datatable-id',
                 columns=[
                     {"name": i, "id": i, "deletable": False, "selectable": True} for i in df.columns
-                    # {"name": i, "id": i} for i in df.columns
                 ],
                 data=df.to_dict('records'),
                 editable=False,
@@ -104,7 +108,8 @@ app.layout = html.Div([
                 }
             ),
             width=12)
-    ]),
+    ],
+    style={'padding-top':str(NAVHEIGHT+10)+'px'}),
 
     dbc.Row([
         dbc.Col(
@@ -146,16 +151,20 @@ app.layout = html.Div([
 )
 # Callback inputs are passed as arguments
 def update_map(viewdata, row):
+    global children, center
     dff = pd.DataFrame.from_dict(viewdata)
 
-    if row is not None:
+    if not row:
+        return None, None, 6
+    else:
         lat = float(dff.iloc[row, 14])
         long = float(dff.iloc[row, 15])
+        animal_type = str(dff.iloc[row, 4])
+        breed = str(dff.iloc[row, 5])
+        animal_name = str(dff.iloc[row, 10])
 
-        animal_type = str(dff.iloc[row, 4].item())
-        breed = str(dff.iloc[row, 5].item())
 
-        animal_name = str(dff.iloc[row, 10].item())
+
         if animal_name == '':
             animal_name = '[No name]'
 
@@ -180,9 +189,7 @@ def update_map(viewdata, row):
 
         # Center map on selection
         center = [lat, long]
-        return children, center, 10
-    else:
-        return None, None, 10
+        return children, center, 9
 
 
 # Callback for radio buttons
